@@ -1,27 +1,10 @@
----
-jupyter:
-  jupytext:
-    formats: ipynb,md
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.5
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
----
-
 # Hidden Markov Model
 
-
-* `submitted.py`: Your homework. Edit, and then submit to <a href="https://www.gradescope.com/courses/486387">Gradescope</a>.
-* `mp08_notebook.ipynb`: This is a <a href="https://anaconda.org/anaconda/jupyter">Jupyter</a> notebook to help you debug.  You can completely ignore it if you want, although you might find that it gives you useful instructions.
-* `tests/test_visible.py`: This file contains about half of the <a href="https://docs.python.org/3/library/unittest.html">unit tests</a> that Gradescope will run in order to grade your homework.  If you can get a perfect score on these tests, then you should also get a perfect score on the additional hidden tests that Gradescope uses.
-* `data`: This directory contains the data.
-* `util.py`: This is an auxiliary program that you can use to read the data, evaluate the accuracy, etc.
-
+-   `submitted.py`: Your homework. Edit, and then submit to <a href="https://www.gradescope.com/courses/486387">Gradescope</a>.
+-   `mp08_notebook.ipynb`: This is a <a href="https://anaconda.org/anaconda/jupyter">Jupyter</a> notebook to help you debug. You can completely ignore it if you want, although you might find that it gives you useful instructions.
+-   `tests/test_visible.py`: This file contains about half of the <a href="https://docs.python.org/3/library/unittest.html">unit tests</a> that Gradescope will run in order to grade your homework. If you can get a perfect score on these tests, then you should also get a perfect score on the additional hidden tests that Gradescope uses.
+-   `data`: This directory contains the data.
+-   `util.py`: This is an auxiliary program that you can use to read the data, evaluate the accuracy, etc.
 
 ### Table of Contents
 
@@ -30,13 +13,13 @@ jupyter:
 1. <a href="#section3">Taggers</a>
 1. <a href="#section4">Baseline Tagger</a>
 1. <a href="#section5">Viterbi: HMM Tagger</a>
-1. <a href="#section6">Viterbi\_ec: Improveing HMM Tagger</a>
-
-
+1. <a href="#section6">Viterbi_ec: Improveing HMM Tagger</a>
 
 <a id='section1'></a>
+
 ## Reading the data
-The dataset consists of thousands of sentences with ground-truth POS tags. 
+
+The dataset consists of thousands of sentences with ground-truth POS tags.
 
 The provided load_dataset function will read in the data as a nested list with the outer dimension representing each sentence and inner dimensin representing each tagged word. The following cells will help you go through the representation of the data.
 
@@ -60,6 +43,7 @@ print('Here is an sample sentence from the training set:\n', train_set[0])
 ```
 
 <a id='section2'></a>
+
 <h2>Tagset</h2>
 
 <p>
@@ -92,8 +76,8 @@ your code on two other datasets with a different tagset</font></b>.
 <li> X miscellaneous hard-to-classify items
 </ul>
 
-
 <a id='section3'></a>
+
 <h2>Taggers</h2>
 
 You will need to write two main types of tagging functions:
@@ -105,19 +89,22 @@ You will need to write two main types of tagging functions:
 
 For implementation of this MP, You may use numpy (though it's not needed). <b><font color=red>You may not use other non-standard modules (including nltk)</font></b>.
 
-You should use the provided training data to train the parameters of your model and the test sets to test its accuracy. 
+You should use the provided training data to train the parameters of your model and the test sets to test its accuracy.
 
 In addition, your code will be tested on two hidden datasets that are not available to you, which has different number of tags and words from the ones provided to you. So do NOT hardcode any of your important computations, such as initial probabilities, transition probabilities, emission probabilities, number or name of tags, and etc. We will inspect code for hardcoding computations/values and will penalize such implementations.
 
-
 <a id='section4'></a>
+
 <h2>Baseline Tagger</h2>
 
 The Baseline tagger considers each word independently, ignoring previous words and tags. For each word w, it counts how many times w occurs with each tag in the training data. When processing the test data, it consistently gives w the tag that was seen most often. For unseen words, it should guess the tag that's seen the most often in training dataset.
 
 #### For all seen word w:
+
 $$Tag_{w}= \operatorname*{argmax}_{t \in T} (\text{# times tag t is matched to word w}) $$
+
 #### For all unseen word w':
+
 $$Tag_{w'}= \operatorname*{argmax}_{t \in T} (\text{# times tag t appears in the training set}) $$
 
 A correctly working baseline tagger should get about 93.9% accuracy on the Brown corpus development set, with over 90% accuracy on multitag words and over 69% on unseen words.
@@ -151,6 +138,7 @@ print("unseen word accuracy: {0:.4f}".format(unseen_words_accuracy))
 ```
 
 #### <a id='section5'></a>
+
 <h2>Viterbi: HMM Tagger</h2>
 <p>
 The Viterbi tagger should implement the HMM trellis (Viterbi) decoding algoirthm
@@ -241,6 +229,7 @@ print("unseen word accuracy: {0:.4f}".format(unseen_words_accuracy))
 ```
 
 <a id='section6'></a>
+
 <h2>Viterbi_ec: Improving HMM Tagger (Optional, for Extra Credit only)</h2>
 <p>
 The previous Vitebi tagger fails to beat the baseline because it does very poorly on
@@ -288,7 +277,6 @@ time it runs.
       Global values set during one test will carry over to subsequent tests.
 </ul>
 
-
 ```python
 help(submitted.viterbi_ec)
 ```
@@ -312,8 +300,6 @@ print("unseen word accuracy: {0:.4f}".format(unseen_words_accuracy))
 
 <a id='section3'></a>
 
-
 <a id='section4'></a>
-
 
 <a id='grade'></a>
